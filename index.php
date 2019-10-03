@@ -30,7 +30,7 @@
 			echo file_get_contents($statdir + "guilds.txt");
 
 		case "branch":
-			echo $pacjageJSON["branch"];
+			echo $packageJSON["branch"];
 		case "packageName":
 			echo $packageJSON['name'];
 		case "botversion":
