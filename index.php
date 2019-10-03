@@ -28,41 +28,56 @@
 			break;
 		case "guildcount":
 			echo file_get_contents($statdir + "guilds.txt");
-
+			break;
 		case "branch":
 			echo $pacjageJSON["branch"];
+			break;
 		case "packageName":
 			echo $packageJSON['name'];
+			break;
 		case "botversion":
 			echo $packageJSON['version'];
+			break;
 		case "build":
 			echo $packageJSON["build"];
+			break;
 		case "description":
-			echo $packageJSON["description"];	
+			echo $packageJSON["description"];
+			break;	
 		case "botOwnerID":
 			echo $packageJSON["ownerID"];
+			break;
 		case "engines":
 			echo $packageJSON["engines"];
+			break;
 		case "packageScripts":
 			echo $packageJSON['scripts'];
+			break;
 		case "botDependencies":
 			echo $packageJSON['dependencies'];
+			break;
 		case "packageRepository":
 			echo $packageJSON['repository'];
+			break;
 		case "author":
 			echo $packageJSON["author"];
+			break;
 		case "license":
 			echo $packageJSON["license"];
+			break;
 		case "bugReportURL":
 			echo $packageJSON['bugs']['url'];
+			break;
 		case "botHomepage":
 			echo $packageJSON['homepage'];
+			break;
 
 			//If the user made an invalid request
 			//e.g ?req     ?req=lolxd
 
 		default:
 			header("HTTP/1.1 400 Bad Request");
+			break;
 	}
 
 
