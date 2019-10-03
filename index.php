@@ -15,7 +15,7 @@
 		$statdir = $installdir + "/modules/stats/";
 
 			//Getting contents of package.json AND parsing it.
-	$packageJSON = json_decode(file_get_contents($installdir."/package.json");, true);
+	$packageJSON = json_decode(file_get_contents($installdir."/package.json"), true);
 
 
 			//Checks what the user requested to our responses.
@@ -30,8 +30,8 @@
 			echo file_get_contents($statdir + "guilds.txt");
 			break;
 		case "branch":
-			echo $pacjageJSON["branch"];
 			break;
+			echo $packageJSON["branch"];
 		case "packageName":
 			echo $packageJSON['name'];
 			break;
