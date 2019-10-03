@@ -19,7 +19,7 @@
 
 
 			//Checks what the user requested to our responses.
-	switch $request {
+	switch ($request) {
 		case "usrcount":
 			echo file_get_contents($statdir + "users.txt");
 			break;
