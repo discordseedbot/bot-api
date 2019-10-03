@@ -76,7 +76,7 @@
 			//e.g ?req     ?req=lolxd
 
 		default:
-			header("HTTP/1.1 400 Bad Request");
+			echo("HTTP/1.1 400 Bad Request");
 			break;
 	}
 
