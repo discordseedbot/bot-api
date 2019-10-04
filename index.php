@@ -1,6 +1,6 @@
 <?php
 
-	$SeedBotInstallLocation = "/home/seedbot";
+	$SeedBotInstallLocation = "/home/seedbot/";
 
 
 	//  Please do NOT change anything below this line
@@ -12,10 +12,10 @@
 	$apiVersion = "1.1";
 			//Making stuff easy for my
 		$installdir = $SeedBotInstallLocation;
-		$statdir = $installdir."/modules/stats";
+		$statdir = $installdir."modules/stats/";
 
 			//Getting contents of package.json AND parsing it.
-	$packageJSON = json_decode(file_get_contents($installdir."/package.json"), true);
+	$packageJSON = json_decode(file_get_contents($installdir."package.json"), true);
 
 			//Debugging Stuff
 		//var_dump($_GET);
