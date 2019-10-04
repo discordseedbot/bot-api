@@ -9,7 +9,7 @@
 
 			//Checks if ?req is in the URL bar after the file location
 	$req = $_GET['req'];
-	
+	$apiVersion = "1.1";
 			//Making stuff easy for my
 		$installdir = $SeedBotInstallLocation;
 		$statdir = $installdir."/modules/stats";
@@ -24,9 +24,9 @@
 			//Checks what the user requested to our responses.
 
 	if ($req === "test"){					echo "<h1>It Works!</h1>";}
-	elseif ($req === "usercount"){			echo file_get_contents($statdir."users.txt");}
-	elseif ($req === "channelcount"){		echo file_get_contents($statdir."channels.txt");}
-	elseif ($req === "guildcount"){			echo file_get_contents($statdir."guilds.txt");}
+	elseif ($req === "userCount"){			echo file_get_contents($statdir."users.txt");}
+	elseif ($req === "channelCount"){		echo file_get_contents($statdir."channels.txt");}
+	elseif ($req === "guildCount"){			echo file_get_contents($statdir."guilds.txt");}
 	elseif ($req === "botBranch"){			echo $packageJSON["branch"];}
 	elseif ($req === "packageName"){		echo $packageJSON['name'];}
 	elseif ($req === "botVersion"){			echo $packageJSON['version'];}
@@ -41,6 +41,7 @@
 	elseif ($req === "botLicense"){			echo $packageJSON["license"];}
 	elseif ($req === "botBugReportUrl"){	echo $packageJSON['bugs']['url'];}
 	elseif ($req === "botHomepage"){		echo $packageJSON['homepage'];}
+	elseif ($req === "apiVersion"){			echo $apiVersion;}
 	else{									echo "400 Bad Request<br>Please look at the source code of the API to grasp a better understanding!<br>";}
 
 
