@@ -23,7 +23,7 @@
 
 			//Checks what the user requested to our responses.
 
-	if ($req === "test"){					echo "<h1>It Works!</h1>";}
+	if ($req === "test"){					echo "true";}
 	elseif ($req === "userCount"){			echo file_get_contents($statdir."users.txt");}
 	elseif ($req === "channelCount"){		echo file_get_contents($statdir."channels.txt");}
 	elseif ($req === "guildCount"){			echo file_get_contents($statdir."guilds.txt");}
