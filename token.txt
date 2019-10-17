@@ -1,0 +1,1 @@
+Replace the contents of this file with a token of your choice to verify that the request is coming from your bot.
