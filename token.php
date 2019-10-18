@@ -1,6 +1,6 @@
 <?php
 function tokenValid($tokenGiven){
-	if (strpos($tokenGiven, file_get_contents('./../token.txt')) !== false){
+	if ($tokenGiven === file_get_contents('./../token.txt')){
 		echo "Valid Token<br>";
 		return true;
 	} else {
