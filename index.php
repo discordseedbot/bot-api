@@ -1,7 +1,6 @@
 <?php
-
-	$SeedBotInstallLocation = "/home/seedbot/";
-
+	//Config Location [please change]
+	$configLocation = "./config.json";
 
 	//  Please do NOT change anything below this line
 	//  UNLESS you know what you are doing.
@@ -9,40 +8,44 @@
 
 			//Checks if ?req is in the URL bar after the file location
 	$req = $_GET['req'];
-	$apiVersion = "1.1";
-			//Making stuff easy for my
-		$installdir = $SeedBotInstallLocation;
-		$statdir = $installdir."modules/stats/";
+	$data = $_GET['data'];
+	$apiVersion = "1.2";
+	$apiLicense = "GPL-3.0-or-later";
 
-			//Getting contents of package.json AND parsing it.
-	$packageJSON = json_decode(file_get_contents($installdir."package.json"), true);
-
-			//Debugging Stuff
-		//var_dump($_GET);
-		//var_dump($packageJSON);
+	include './get.php';
+	include './update.php';
+	include './token.php';
 
 			//Checks what the user requested to our responses.
 
-	if ($req === "test"){					echo "true";}
-	elseif ($req === "userCount"){			echo file_get_contents($statdir."users.txt");}
-	elseif ($req === "channelCount"){		echo file_get_contents($statdir."channels.txt");}
-	elseif ($req === "guildCount"){			echo file_get_contents($statdir."guilds.txt");}
-	elseif ($req === "botBranch"){			echo $packageJSON["branch"];}
-	elseif ($req === "packageName"){		echo $packageJSON['name'];}
-	elseif ($req === "botVersion"){			echo $packageJSON['version'];}
-	elseif ($req === "botBuild"){			echo $packageJSON["build"];}
-	elseif ($req === "botDescription"){		echo $packageJSON["description"];}
-	elseif ($req === "botOwnerID"){			echo $packageJSON["ownerID"];}
-	elseif ($req === "botEngines"){			echo $packageJSON["engines"];}
-	elseif ($req === "packageScripts"){		echo $packageJSON['scripts'];}
-	elseif ($req === "botDependencies"){	echo $packageJSON['dependencies'];}
-	elseif ($req === "packageRepository"){	echo $packageJSON['repository'];}
-	elseif ($req === "author"){				echo $packageJSON["author"];}
-	elseif ($req === "botLicense"){			echo $packageJSON["license"];}
-	elseif ($req === "botBugReportUrl"){	echo $packageJSON['bugs']['url'];}
-	elseif ($req === "botHomepage"){		echo $packageJSON['homepage'];}
-	elseif ($req === "apiVersion"){			echo $apiVersion;}
-	else{									echo "400 Bad Request<br>Please look at the source code of the API to grasp a better understanding!<br>";}
+	if(!isset($_GET['token'])){
+		if ($req === "connectionTest"){				echo "true";}
+		elseif ($req === "userCount"){				getData($configLocation,$req);}
+		elseif ($req === "channelCount"){			getData($configLocation,$req);}
+		elseif ($req === "guildCount"){				getData($configLocation,$req);}
+		elseif ($req === "botVersion"){				getData($configLocation,$req);}
+		elseif ($req === "botBuild"){				getData($configLocation,$req);}
+		elseif ($req === "botBuildDate"){			getData($configLocation,$req);}
+		elseif ($req === "botBranch"){				getData($configLocation,$req);}
+		elseif ($req === "botOwnerID"){				getData($configLocation,$req);}
+		elseif ($req === "botLicense"){				getData($configLocation,$req);}
+		elseif ($req === "packageName"){			getData($configLocation,$req);}
+		elseif ($req === "packageDescription"){		getData($configLocation,$req);}
 
+			//API Requests
+		elseif ($req === "apiLicense"){				getData($configLocation,$req);}
+		elseif ($req === "packageAuthor"){			getData($configLocation,$req);}
+		elseif ($req === "apiVersion"){				echo $apiVersion;}
+		else{										echo file_get_contents('./error-400.html');}
+	} else {
+		$token = $_GET['token'];
+		//Checks if token given is valid
+		if (tokenValid($token)){
+			//Runs updateData from update.php
+			updateData($configLocation, $req, $data);
+		} else {
+			echo "4xx Bad Token<br>You have sent an invalid token, either you bot is not configured properly or you are not authorized to do so.";
+		}
+	}
 
 ?>
