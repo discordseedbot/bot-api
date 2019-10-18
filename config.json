@@ -1,6 +1,6 @@
 {
 	"servername": "localhost",
-	"username": "username",
-	"password": "password",
+	"username": "user",
+	"password": "root",
 	"database": "seedbot"
 }
