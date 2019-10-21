@@ -2,6 +2,9 @@
 	//Config Location [please change]
 	$configLocation = "./config.json";
 
+	//Token Location [please change]
+	$tokenLocation = "./../token.txt";
+
 	//  Please do NOT change anything below this line
 	//  UNLESS you know what you are doing.
 
@@ -9,12 +12,11 @@
 			//Checks if ?req is in the URL bar after the file location
 	$req = $_GET['req'];
 	$data = $_GET['data'];
-	$apiVersion = "1.2";
+	$apiVersion = "1.2.1";
 	$apiLicense = "GPL-3.0-or-later";
 
 	include './get.php';
 	include './update.php';
-	include './token.php';
 
 			//Checks what the user requested to our responses.
 
@@ -40,7 +42,7 @@
 	} else {
 		$token = $_GET['token'];
 		//Checks if token given is valid
-		if (tokenValid($token)){
+		if (!strpos($token, file_get_contents($tokenLocation))){
 			//Runs updateData from update.php
 			updateData($configLocation, $req, $data);
 		} else {
