@@ -12,7 +12,7 @@
 			//Checks if ?req is in the URL bar after the file location
 	$req = $_GET['req'];
 	$data = $_GET['data'];
-	$apiVersion = "1.2.1";
+	$apiVersion = "1.2.2";
 	$apiLicense = "GPL-3.0-or-later";
 
 	include './get.php';
@@ -38,7 +38,8 @@
 		elseif ($req === "apiLicense"){				getData($configLocation,$req);}
 		elseif ($req === "packageAuthor"){			getData($configLocation,$req);}
 		elseif ($req === "apiVersion"){				echo $apiVersion;}
-		else{										echo file_get_contents('./error-400.html');}
+		else{										//echo file_get_contents('./error-400.html');
+		header("Location: https://www.youtube.com/watch?v=XDXrP9HET2A");}
 	} else {
 		$token = $_GET['token'];
 		//Checks if token given is valid
