@@ -38,8 +38,7 @@
 		elseif ($req === "apiLicense"){				getData($configLocation,$req);}
 		elseif ($req === "packageAuthor"){			getData($configLocation,$req);}
 		elseif ($req === "apiVersion"){				echo $apiVersion;}
-		else{										//echo file_get_contents('./error-400.html');
-		header("Location: https://www.youtube.com/watch?v=XDXrP9HET2A");}
+		else{										echo file_get_contents('./error-400.html');
 	} else {
 		$token = $_GET['token'];
 		//Checks if token given is valid
@@ -47,7 +46,8 @@
 			//Runs updateData from update.php
 			updateData($configLocation, $req, $data);
 		} else {
-			echo "4xx Bad Token<br>You have sent an invalid token, either you bot is not configured properly or you are not authorized to do so.";
+			header("Location: https://www.youtube.com/watch?v=XDXrP9HET2A");
+			//echo "4xx Bad Token<br>You have sent an invalid token, either you bot is not configured properly or you are not authorized to do so.";
 		}
 	}
 
