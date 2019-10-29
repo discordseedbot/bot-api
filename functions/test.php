@@ -6,7 +6,7 @@
 		$token = "qT4sepbVSSH-V9ExrB7pJhK-bwEjHcp4F5gppP9FBVka7wFVHtWQuvQX";
 		$req = "userCount";
 		$data = "100";
-		$configLocation = "./config.json";
+		$configLocation = "../../config.json";
 		//Checks if token given is valid
 		if (tokenValid($token)){
 			//Runs updateData from update.php

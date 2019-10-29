@@ -12,11 +12,11 @@
 			//Checks if ?req is in the URL bar after the file location
 	$req = $_GET['req'];
 	$data = $_GET['data'];
-	$apiVersion = "1.2.2";
+	$apiVersion = "1.2.3";
 	$apiLicense = "GPL-3.0-or-later";
 
-	include './get.php';
-	include './update.php';
+	include './functions/get.php';
+	include './functions/update.php';
 
 			//Checks what the user requested to our responses.
 
@@ -46,8 +46,8 @@
 			//Runs updateData from update.php
 			updateData($configLocation, $req, $data);
 		} else {
-			header("Location: https://www.youtube.com/watch?v=XDXrP9HET2A");
-			//echo "4xx Bad Token<br>You have sent an invalid token, either you bot is not configured properly or you are not authorized to do so.";
+			echo "4xx Bad Token<br>You have sent an invalid token, either you bot is not configured properly or you are not authorized to do so.";
+			echo `<br><br><iframe src="https://www.youtube.com/watch?v=6EyCTHgSFME&autoplay=1">`;
 		}
 	}
 
