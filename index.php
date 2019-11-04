@@ -33,12 +33,13 @@
 		elseif ($req === "botLicense"){				getData($configLocation,$req);}
 		elseif ($req === "packageName"){			getData($configLocation,$req);}
 		elseif ($req === "packageDescription"){		getData($configLocation,$req);}
+		elseif ($req === "isOnline"){				getData($configLocation,$req);}
 
 			//API Requests
 		elseif ($req === "apiLicense"){				getData($configLocation,$req);}
 		elseif ($req === "packageAuthor"){			getData($configLocation,$req);}
 		elseif ($req === "apiVersion"){				echo $apiVersion;}
-		else{										echo file_get_contents('./error-400.html');
+		else{										echo file_get_contents('./error-400.html');}
 	} else {
 		$token = $_GET['token'];
 		//Checks if token given is valid
