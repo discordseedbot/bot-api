@@ -48,7 +48,6 @@
 			updateData($configLocation, $req, $data);
 		} else {
 			echo "4xx Bad Token<br>You have sent an invalid token, either you bot is not configured properly or you are not authorized to do so.";
-			echo `<br><br><iframe src="https://www.youtube.com/watch?v=6EyCTHgSFME&autoplay=1">`;
 		}
 	}
 
