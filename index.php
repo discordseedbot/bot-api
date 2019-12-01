@@ -71,7 +71,7 @@
 		} else {
 			echo "4xx Bad Token<br>You have sent an invalid token, either you bot is not configured properly or you are not authorized to do so.";
 			$tokenValid = false;
-			$logType = "Failed Push"
+			$logType = "Failed Push";
 		}
 	}
 
