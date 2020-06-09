@@ -6,6 +6,7 @@
 	    $reqArr = array("userCount",
 	                    "channelCount",
 	                    "guildCount",
+						"botBranch",
 	                    "botVersion",
 	                    "botBuild",
 	                    "botBuildDate",
