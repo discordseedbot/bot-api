@@ -9,9 +9,11 @@
 	//  UNLESS you know what you are doing.
 
 //Debugging Shit
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+if (ISSET($_GET['debug'])) {
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+}
 
 	//Include './functions/get.php';
 	require_once("./functions/update.php");
