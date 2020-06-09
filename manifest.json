@@ -1,0 +1,13 @@
+{
+    "name": "bot-api",
+    "version": "1.3",
+    "description": "An API for SeedBot so users can freely access statistics.",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/discordseedbot/bot-api.git"
+    },
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+      "url": "https://github.com/discordseedbot/bot-api/issues"
+    },
+}

@@ -2,6 +2,7 @@
 function getData($configLocation, $dataToGet) {
 
 	$config = json_decode(file_get_contents($configLocation));
+	if ($cfg===NULL)
 	$servername = $config->{"servername"};
 	$username = $config->{"username"};
 	$password = $config->{"password"};
