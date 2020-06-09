@@ -23,7 +23,7 @@
 					"extendedHelp" : "https://docs.seedbot.xyz/api/api-setup"
 				}
 			],
-			"code": 403,
+			"code": 401,
 			"message": "An Invalid Token was sent to the server, the request was not processed."
 		}
 	},
@@ -64,6 +64,18 @@
 				}
 			],
 			"code": 500,
+			"message": "Internal Server Error."
+		},
+		"tokenNotSet": {
+			"errors": [
+				{
+					"domain": "developer",
+					"reason": "developerTokenNotSet",
+					"message": "Content Update Token Not Set.",
+					"extendedHelp": "https://docs.seedbot.xyz/api/api-setup"
+				}
+			],
+			"code": 400,
 			"message": "Internal Server Error."
 		}
 	}
