@@ -1,8 +1,8 @@
 {
 	"db": {
 		"server": "localhost",
-		"username": "username",
-		"password": "password",
+		"username": "user",
+		"password": "root",
 		"dbname": "seedbot"
 	},
 	"log": true,
