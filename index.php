@@ -8,76 +8,62 @@
 	//  Please do NOT change anything below this line
 	//  UNLESS you know what you are doing.
 
+//Debugging Shit
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-			//Checks if ?req is in the URL bar after the file location
-	$req = $_GET['req'];
-	$data = $_GET['data'];
-	$apiVersion = "1.2.3";
-	$apiLicense = "GPL-3.0-or-later";
-
-	Include './functions/get.php';
-	Include './functions/update.php';
-	Include "./functions/ip.php";
-
-
- /* Log users */
-    $writeDirectory = "/etc/darioxlog";
-    $logFileName = "seedbot-api.csv";
-    $logWriteDestination = $writeDirectory."/".$logFileName;
-    $log = fopen($logWriteDestination, a);
-    $writeToLogType;
-    $writeToLogIP = $_SERVER['REMOTE_ADDR'];
-    $writeToLogUserAgent = str_replace(",", " | ", $_SERVER['HTTP_USER_AGENT']);
-    $writeToLogHostname = $_SERVER['REMOTE_HOST'];
-    $writeToLogCountry = ip_info($_SERVER['REMOTE_ADDR'], "country");
-    $writeToLogTime = date('l j \of F Y h;i:s A');
-    $writeToLogReferer = $_SERVER['HTTP_REFERER'];
-
-
-
-
+	//Include './functions/get.php';
+	require_once("./functions/update.php");
+	require_once("./functions/ip.php");
+	require_once(__DIR__."/functions/errorHandle.php");
+	require_once('./req_handle.php');
 
 			//Checks what the user requested to our responses.
-    $logType = "Invalid Request/Inproper Use.";
-	if(!isset($_GET['token'])){
-    	$logType = "Request";
-		if ($req === "connectionTest"){				echo "true";}
-		elseif ($req === "userCount"){				getData($configLocation,$req);}
-		elseif ($req === "channelCount"){			getData($configLocation,$req);}
-		elseif ($req === "guildCount"){				getData($configLocation,$req);}
-		elseif ($req === "botVersion"){				getData($configLocation,$req);}
-		elseif ($req === "botBuild"){				getData($configLocation,$req);}
-		elseif ($req === "botBuildDate"){			getData($configLocation,$req);}
-		elseif ($req === "botBranch"){				getData($configLocation,$req);}
-		elseif ($req === "botOwnerID"){				getData($configLocation,$req);}
-		elseif ($req === "botLicense"){				getData($configLocation,$req);}
-		elseif ($req === "packageName"){			getData($configLocation,$req);}
-		elseif ($req === "packageDescription"){		getData($configLocation,$req);}
-		elseif ($req === "isOnline"){				getData($configLocation,$req);}
-
-			//API Requests
-		elseif ($req === "apiLicense"){				getData($configLocation,$req);}
-		elseif ($req === "packageAuthor"){			getData($configLocation,$req);}
-		elseif ($req === "apiVersion"){				echo $apiVersion;}
-		else{										echo file_get_contents('./error-400.html');}
-	} else {
+	if(isset($_GET['token'])){
 		$token = $_GET['token'];
 		//Checks if token given is valid
 		if (!strpos($token, file_get_contents($tokenLocation))){
 			//Runs updateData from update.php
-			$tokenValid = true;
-			updateData($configLocation, $req, $data);
-			$logType = "Push";
+			updateData($configLocation, $_GET['req'], $_GET['data']);
+			logwrite("Data Push");die();
 		} else {
-			echo "4xx Bad Token<br>You have sent an invalid token, either you bot is not configured properly or you are not authorized to do so.";
-			$tokenValid = false;
-			$logType = "Failed Push";
+			$response = errorHandle("authentication","badToken");
+			logwrite($response["message"]);die();
 		}
 	}
+	if (ISSET($_GET['req'])) {
+		req_handle($configLocation,$_GET['req']);
+		logwrite("Request");die();
+	} else {
+		$response = errorHandle("requestHandler","unknownRequest");
+		logwrite($response["message"]);die();
+	}
 
-	$writeToLog = $writeToLogTime.",".$writeToLogIP.",".$writeToLogUserAgent.",".$writeToLogCountry.",".str_replace(",", " ", $req).",".$logType.",".$writeToLogReferer.",".$writeToLogHostname."\n";
-	fwrite($log, $writeToLog);
-    fclose($log);
+
+	 /* Log users */
+	 function logwrite($logType) {
+	 	if(!isset($_GET['nolog'])){
+		    $writeDirectory = "/etc/darioxlog";
+		    $logFileName = "seedbot-api.csv";
+			if ($logType === "Data Push") {
+		    	$logFileName = "seedbot-api-datapush.csv";
+			}
+		    $logWriteDestination = $writeDirectory."/".$logFileName;
+		    $log = fopen($logWriteDestination, 'a');
+		    $writeToLogType;
+		    $writeToLogIP = $_SERVER['REMOTE_ADDR'];
+		    $writeToLogUserAgent = str_replace(",", " | ", $_SERVER['HTTP_USER_AGENT']);
+		    $writeToLogHostname = $_SERVER["REMOTE_HOST"] ?: gethostbyaddr($_SERVER["REMOTE_ADDR"]);
+		    $writeToLogCountry = ip_info($_SERVER['REMOTE_ADDR'], "country");
+		    $writeToLogTime = date('l j \of F Y h;i:s A');
+		    $writeToLogReferer = $_SERVER['HTTP_REFERER'];
+			$writeToLog = $writeToLogTime.",".$writeToLogIP.",".$writeToLogUserAgent.",".$writeToLogCountry.",".str_replace(",", " ", $_GET['req']).",".$logType.",".$writeToLogReferer.",".$writeToLogHostname."\n";
+			fwrite($log, $writeToLog);
+		    fclose($log);
+		}
+	 }
+
 
 
 

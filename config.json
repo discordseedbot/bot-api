@@ -1,6 +1,10 @@
 {
-	"servername": "localhost",
-	"username": "user",
-	"password": "root",
-	"database": "seedbot"
+	"db": {
+		"server": "localhost",
+		"username": "username",
+		"password": "password",
+		"dbname": "seedbot"
+	},
+	"log": true,
+	"dataLoc": "data"
 }
