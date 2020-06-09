@@ -1,0 +1,70 @@
+{
+	"domain": {
+		"error": {
+			"errors": [
+				{
+					"domain": "domain",
+					"reason": "domainError",
+					"message": "",
+					"extendedHelp": ""
+				}
+			],
+			"code": 500,
+			"message": ""
+		}
+	},
+	"authentication": {
+		"badToken": {
+			"errors": [
+				{
+					"domain": "authentication",
+					"reason": "authenticationBadToken",
+					"message": "An Invalid Token was sent to the server, the request was not processed.",
+					"extendedHelp" : "https://docs.seedbot.xyz/api/api-setup"
+				}
+			],
+			"code": 403,
+			"message": "An Invalid Token was sent to the server, the request was not processed."
+		}
+	},
+	"requestHandler": {
+		"unknownRequest": {
+			"errors": [
+				{
+					"domain": "requestHandler",
+					"reason": "requestHandlerUnknownRequest",
+					"message": "Unknown API Request",
+					"extendedHelp": "https://docs.seedbot.xyz/api/api-usage"
+				}
+			],
+			"code": 404,
+			"message": "Unknown API Request"
+		}
+	},
+	"devleoper": {
+		"unknownDomain": {
+			"errors": [
+				{
+					"domain": "developer",
+					"reason": "developerUnknownDomain",
+					"message": "Internal Server Error.",
+					"extendedHelp": "seedbot@cock.li"
+				}
+			],
+			"code": 500,
+			"message": "Internal Server Error."
+		},
+		"unknownReason": {
+			"errors": [
+				{
+					"domain": "developer",
+					"reason": "developerUnknownReason",
+					"message": "Internal Server Error.",
+					"extendedHelp": "seedbot@cock.li"
+				}
+			],
+			"code": 500,
+			"message": "Internal Server Error."
+		},
+	}
+}

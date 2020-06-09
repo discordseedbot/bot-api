@@ -6,4 +6,5 @@
 		"db": "seedbot"
 	},
 	"log": true,
+	"dataLoc": "data"
 }
