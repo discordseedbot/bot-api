@@ -14,6 +14,7 @@
 	                    "packagename",
 	                    "packagedescription",
 	                    "packageAuthor",
+						"lastAPIUpdate",
 	                    "isOnline");
 	    if (in_array($req,$reqArr)) {
 	        getData($cfg,$req);

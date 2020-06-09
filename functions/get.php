@@ -4,7 +4,7 @@
 		$servername = $config["db"]["server"];
 		$username = $config["db"]["username"];
 		$password = $config["db"]["password"];
-		$dbname = $config["db"]["db"];
+		$dbname = $config["db"]["dbname"];
 
 		// Create connection
 		$conn = new mysqli($servername, $username, $password, $dbname);

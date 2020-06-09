@@ -1,11 +1,11 @@
 <?php
 function updateData($configLocation, $thingToUpdate, $thingToUpdateContent) {
-	$config = json_decode(file_get_contents($configLocation));
+	$config = json_decode(file_get_contents($configLocation),true);
 
 	$servername = $config["db"]["server"];
 	$username = $config["db"]["username"];
 	$password = $config["db"]["password"];
-	$dbname = $config["db"]["seedbot"];
+	$dbname = $config["db"]["dbname"];
 
 	// Create connection
 	$conn = mysqli_connect($servername, $username, $password, $dbname);

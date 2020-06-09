@@ -20,34 +20,35 @@ error_reporting(E_ALL);
 	require_once('./req_handle.php');
 
 			//Checks what the user requested to our responses.
-	if (!ISSET($_GET['req'])) {
-		$response = errorHandle("requestHandler","unknownRequest");
-		$logType = $response["message"];
-		$req="null";
-	} else {
-		req_handle($configLocation,$_GET['req']);
-		$logType = "Request";
-	}
 	if(isset($_GET['token'])){
 		$token = $_GET['token'];
 		//Checks if token given is valid
 		if (!strpos($token, file_get_contents($tokenLocation))){
 			//Runs updateData from update.php
-			$tokenValid = true;
-			updateData($configLocation, $req, $data);
-			$logType = "Push";
+			updateData($configLocation, $_GET['req'], $_GET['data']);
+			logwrite("Data Push");die();
 		} else {
 			$response = errorHandle("authentication","badToken");
-			$logType = $response->message[0]->message;
-			$tokenValid = false;
+			logwrite($response["message"]);die();
 		}
+	}
+	if (ISSET($_GET['req'])) {
+		req_handle($configLocation,$_GET['req']);
+		logwrite("Request");die();
+	} else {
+		$response = errorHandle("requestHandler","unknownRequest");
+		logwrite($response["message"]);die();
 	}
 
 
 	 /* Log users */
+	 function logwrite($logType) {
 	 	if(!isset($_GET['nolog'])){
 		    $writeDirectory = "/etc/darioxlog";
 		    $logFileName = "seedbot-api.csv";
+			if ($logType === "Data Push") {
+		    	$logFileName = "seedbot-api-datapush.csv";
+			}
 		    $logWriteDestination = $writeDirectory."/".$logFileName;
 		    $log = fopen($logWriteDestination, 'a');
 		    $writeToLogType;
@@ -61,6 +62,7 @@ error_reporting(E_ALL);
 			fwrite($log, $writeToLog);
 		    fclose($log);
 		}
+	 }
 
 
 
