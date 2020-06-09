@@ -8,22 +8,26 @@
 	//  Please do NOT change anything below this line
 	//  UNLESS you know what you are doing.
 
-	//Include './functions/get.php';
-	Include './functions/update.php';
-	Include "./functions/ip.php";
-	Include './functions/errorHandle.php';
-	Include './req_handle.php';
+//Debugging Shit
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-	$cfg = json_decode($configLocation,true);
+	//Include './functions/get.php';
+	require_once("./functions/update.php");
+	require_once("./functions/ip.php");
+	require_once(__DIR__."/functions/errorHandle.php");
+	require_once('./req_handle.php');
 
 			//Checks what the user requested to our responses.
 	if (!ISSET($_GET['req'])) {
 		$response = errorHandle("requestHandler","unknownRequest");
-		$logType = $response->message;
+		$logType = $response["message"];
+		$req="null";
 	} else {
-		req_handle($cfg,$_GET['req']);
+		req_handle($configLocation,$_GET['req']);
+		$logType = "Request";
 	}
-    $logType = "Invalid Request/Inproper Use.";
 	if(isset($_GET['token'])){
 		$token = $_GET['token'];
 		//Checks if token given is valid
@@ -41,19 +45,19 @@
 
 
 	 /* Log users */
-	 	if(!$_GET['nolog']){
+	 	if(!isset($_GET['nolog'])){
 		    $writeDirectory = "/etc/darioxlog";
 		    $logFileName = "seedbot-api.csv";
 		    $logWriteDestination = $writeDirectory."/".$logFileName;
-		    $log = fopen($logWriteDestination, a);
+		    $log = fopen($logWriteDestination, 'a');
 		    $writeToLogType;
 		    $writeToLogIP = $_SERVER['REMOTE_ADDR'];
 		    $writeToLogUserAgent = str_replace(",", " | ", $_SERVER['HTTP_USER_AGENT']);
-		    $writeToLogHostname = $_SERVER['REMOTE_HOST'];
+		    $writeToLogHostname = $_SERVER["REMOTE_HOST"] ?: gethostbyaddr($_SERVER["REMOTE_ADDR"]);
 		    $writeToLogCountry = ip_info($_SERVER['REMOTE_ADDR'], "country");
 		    $writeToLogTime = date('l j \of F Y h;i:s A');
 		    $writeToLogReferer = $_SERVER['HTTP_REFERER'];
-			$writeToLog = $writeToLogTime.",".$writeToLogIP.",".$writeToLogUserAgent.",".$writeToLogCountry.",".str_replace(",", " ", $req).",".$logType.",".$writeToLogReferer.",".$writeToLogHostname."\n";
+			$writeToLog = $writeToLogTime.",".$writeToLogIP.",".$writeToLogUserAgent.",".$writeToLogCountry.",".str_replace(",", " ", $_GET['req']).",".$logType.",".$writeToLogReferer.",".$writeToLogHostname."\n";
 			fwrite($log, $writeToLog);
 		    fclose($log);
 		}

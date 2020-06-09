@@ -41,7 +41,7 @@
 			"message": "Unknown API Request"
 		}
 	},
-	"devleoper": {
+	"developer": {
 		"unknownDomain": {
 			"errors": [
 				{
@@ -65,6 +65,6 @@
 			],
 			"code": 500,
 			"message": "Internal Server Error."
-		},
+		}
 	}
 }

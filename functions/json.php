@@ -1,7 +1,11 @@
 <?php
-function isJson($string) {
-	json_decode($string);
-	return (json_last_error() == JSON_ERROR_NONE);
+function is_valid_json($string) {
+	switch (json_decode($string)) {
+		case null:
+			return false;
+		default:
+			return true;
+	}
 }
 
 function json_bute($json_in) {
@@ -10,12 +14,11 @@ function json_bute($json_in) {
 	http://recursive-design.com/blog/2008/03/11/format-json-with-php/
 */
 	$json		 = json_encode($json_in);
-	return $json;
     $result      = '';
     $pos         = 0;
     $strLen      = strlen($json);
-    $indentStr   = '  ';
-    $newLine     = "<br>";
+    $indentStr   = '	';
+    $newLine     = "\n";
     $prevChar    = '';
     $outOfQuotes = true;
 

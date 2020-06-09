@@ -1,7 +1,7 @@
 <?php
 	Include __DIR__."/functions/get.php";
-	Include __DIR__."/functions/json.php";
-	Include __DIR__."/functions/errorHandle.php";
+	require_once(__DIR__."/functions/json.php");
+	require_once(__DIR__."/functions/errorHandle.php");
 	function req_handle($cfg,$req) {
 	    $reqArr = array("userCount",
 	                    "channelCount",
@@ -15,17 +15,17 @@
 	                    "packagedescription",
 	                    "packageAuthor",
 	                    "isOnline");
-						print_r(in_array($req,$reqArr));
 	    if (in_array($req,$reqArr)) {
 	        getData($cfg,$req);
 	    } else {
+			$manifest = file_get_contents("./manifest.json");
 	        switch ($req) {
 	            case 'apiLicense':
-					echo json_bute(file_get_contents("./manifest.json"));
+					echo json_decode($manifest,true)["license"];
 	                die();
 	                break;
 	            case 'apiVersion':
-					print_r(json_decode(file_get_contents(__DIR__."/manifest.json")->version));
+					echo json_decode($manifest,true)["version"];
 	                die();
 	                break;
 	            case 'connectionTest':
