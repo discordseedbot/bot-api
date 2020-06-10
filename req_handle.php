@@ -2,21 +2,10 @@
 	Include __DIR__."/functions/get.php";
 	require_once(__DIR__."/functions/json.php");
 	require_once(__DIR__."/functions/errorHandle.php");
+
+	$reqArr = file_get_contents(__DIR__."/data/requests.json");
+
 	function req_handle($cfg,$req) {
-	    $reqArr = array("userCount",
-	                    "channelCount",
-	                    "guildCount",
-						"botBranch",
-	                    "botVersion",
-	                    "botBuild",
-	                    "botBuildDate",
-	                    "botOwnerID",
-	                    "botLicense",
-	                    "packagename",
-	                    "packagedescription",
-	                    "packageAuthor",
-						"lastAPIUpdate",
-	                    "isOnline");
 	    if (in_array($req,$reqArr)) {
 	        getData($cfg,$req);
 	    } else {

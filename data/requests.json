@@ -1,0 +1,16 @@
+[
+    "userCount",
+	"channelCount",
+	"guildCount",
+	"botBranch",
+	"botVersion",
+	"botBuild",
+	"botBuildDate",
+	"botOwnerID",
+	"botLicense",
+	"packagename",
+	"packagedescription",
+	"packageAuthor",
+	"lastAPIUpdate",
+	"isOnline"
+]

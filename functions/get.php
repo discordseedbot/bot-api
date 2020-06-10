@@ -14,24 +14,9 @@
 		}
 
 		$sql = "SELECT type, content FROM data;";
-/*
-		mysql_select_db($dbname);
-		$retval = mysql_query($sql,$conn);
-
-		if (!$retval) {
-			echo "Could not get data: " . mysql_error();
-			die();
-		}
-
-		while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
-			echo $row[$dataToGet];
-			var_dump($row);
-		}
-*/
 
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
-		    // output data of each row
 		    while($row = $result->fetch_assoc()) {
 		        if($row['type'] == $dataToGet) {
 					echo $row['content'];
